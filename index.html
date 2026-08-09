@@ -68,6 +68,48 @@
         }
       }
 
+      .shooting {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: var(--gold);
+        box-shadow: 0 0 8px 2px var(--gold);
+        border-radius: 50%;
+        animation: shoot 4s linear infinite;
+        opacity: 0;
+      }
+      .shooting::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 56px;
+        height: 2px;
+        background: linear-gradient(
+          to right,
+          rgba(242, 193, 78, 0.85),
+          transparent
+        );
+        transform-origin: 0% 50%;
+        transform: rotate(-30deg);
+      }
+      @keyframes shoot {
+        0% {
+          opacity: 0;
+          transform: translate(0, 0) rotate(0deg);
+        }
+        4% {
+          opacity: 1;
+        }
+        28% {
+          opacity: 0;
+          transform: translate(-260px, 150px) rotate(0deg);
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
       .moon {
         position: absolute;
         top: 8%;
@@ -75,11 +117,11 @@
         width: 46px;
         height: 46px;
         border-radius: 50%;
-        background: radial-gradient(
-          circle at 35% 35%,
-          #fff7e0,
-          var(--gold) 70%
-        );
+        background-image: url('images/blue-moon.png');
+        background-size: cover;
+        background-position: center;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
         box-shadow: 0 0 40px 10px rgba(242, 193, 78, 0.35);
       }
 
@@ -105,7 +147,7 @@
         background: repeating-linear-gradient(
           90deg,
           #2c4636 0 6px,
-          #33513e 6px 12px
+          #2c4636 6px 12px
         );
         border-top: 3px solid #1c2f24;
       }
@@ -442,7 +484,7 @@
 
       <img
         class="couple-img"
-        src="images/transparent-couple.png"
+        src="images/cat-couple.png"
         alt="the two of us"
       />
 
@@ -491,6 +533,15 @@
         f.style.animationDelay = Math.random() * 6 + 's';
         f.style.animationDuration = 5 + Math.random() * 4 + 's';
         fireflyLayer.appendChild(f);
+      }
+
+      for (let i = 0; i < 3; i++) {
+        const sh = document.createElement('div');
+        sh.className = 'shooting';
+        sh.style.left = 45 + Math.random() * 45 + '%';
+        sh.style.top = Math.random() * 35 + '%';
+        sh.style.animationDelay = i * 5 + Math.random() * 4 + 's';
+        starLayer.appendChild(sh);
       }
 
       /* =========================================================
