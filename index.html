@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Ten Years — Letters</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Literata:ital,wght@0,400;0,600;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --red: #e0543d;
+        --red-dim: #a83a29;
+        --black-fur: #423d5c;
+        --outline: #100f1a;
+        --gold: #f2c14e;
+        --gold-dim: #b6913a;
+        --cream: #f3ede0;
+        --dim: #cabfe0;
+        --px: 8px;
+      }
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        font-family: 'Literata', Georgia, serif;
+      }
+
+      /* ================= SCENE ================= */
+      #scene {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          #2a1f47 0%,
+          #402a52 22%,
+          #5a3a54 40%,
+          #7a4a4f 55%,
+          #1c1330 78%,
+          #0a0b1a 100%
+        );
+        overflow: hidden;
+      }
+      .star {
+        position: absolute;
+        border-radius: 50%;
+        background: var(--cream);
+        animation: twinkle 3.5s ease-in-out infinite;
+      }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.2;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .moon {
+        position: absolute;
+        top: 8%;
+        right: 12%;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 35% 35%,
+          #fff7e0,
+          var(--gold) 70%
+        );
+        box-shadow: 0 0 40px 10px rgba(242, 193, 78, 0.35);
+      }
+
+      .mtn {
+        position: absolute;
+        bottom: 14%;
+        left: 0;
+        width: 100%;
+      }
+      .mtn-back {
+        fill: #241c3d;
+      }
+      .mtn-front {
+        fill: #160f27;
+      }
+
+      .ground {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 16%;
+        background: repeating-linear-gradient(
+          90deg,
+          #2c4636 0 6px,
+          #33513e 6px 12px
+        );
+        border-top: 3px solid #1c2f24;
+      }
+
+      .firefly {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--gold);
+        box-shadow: 0 0 6px 2px rgba(242, 193, 78, 0.8);
+        animation: fly 7s ease-in-out infinite;
+        opacity: 0.8;
+      }
+      @keyframes fly {
+        0% {
+          transform: translate(0, 0);
+          opacity: 0.2;
+        }
+        25% {
+          transform: translate(10px, -18px);
+          opacity: 1;
+        }
+        50% {
+          transform: translate(-8px, -30px);
+          opacity: 0.4;
+        }
+        75% {
+          transform: translate(6px, -14px);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(0, 0);
+          opacity: 0.2;
+        }
+      }
+
+      /* decorative couple image, bottom center */
+      .couple-img {
+        position: absolute;
+        bottom: 13%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        height: auto;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+        filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.45));
+        z-index: 3;
+        animation: coupleBob 3s ease-in-out infinite;
+      }
+      @keyframes coupleBob {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(-4px);
+        }
+      }
+
+      /* ================= ENVELOPES ================= */
+      .env-slot {
+        position: absolute;
+        width: 54px;
+        height: 40px;
+        cursor: pointer;
+        transition:
+          transform 0.48s cubic-bezier(0.4, 0.65, 0.2, 1),
+          opacity 0.48s ease;
+        z-index: 5;
+        background: transparent;
+        border: none;
+        padding: 0;
+        margin: 0;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      .env-slot.flying {
+        transform: translate(var(--fx), var(--fy)) scale(2.8)
+          rotate(12deg);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .env-slot.opened {
+        opacity: 0.9;
+      }
+
+      .env-float {
+        width: 100%;
+        height: 100%;
+        animation: envFloat 3.4s ease-in-out infinite;
+        position: relative;
+      }
+      @keyframes envFloat {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-2deg);
+        }
+        50% {
+          transform: translateY(-6px) rotate(2deg);
+        }
+      }
+
+      .env-body {
+        position: absolute;
+        inset: 0;
+        background: var(--gold);
+        border: 2px solid var(--outline);
+        border-radius: 2px;
+      }
+      .env-flap {
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        right: -1px;
+        height: 23px;
+        background: var(--gold-dim);
+        clip-path: polygon(0 0, 100% 0, 50% 92%);
+        border-bottom: 2px solid var(--outline);
+      }
+      .env-seal {
+        position: absolute;
+        left: 50%;
+        top: 56%;
+        transform: translate(-50%, -50%);
+        width: 19px;
+        height: 19px;
+        border-radius: 50%;
+        background: var(--red);
+        border: 2px solid var(--outline);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        color: var(--gold);
+        line-height: 1;
+      }
+      .env-slot:hover .env-body {
+        background: #ffd97a;
+      }
+      .env-slot:focus-visible .env-body {
+        outline: 2px solid var(--cream);
+        outline-offset: 2px;
+      }
+
+      /* ================= LETTER OVERLAY ================= */
+      #letterOverlay {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background: rgba(8, 7, 18, 0.72);
+        backdrop-filter: blur(2px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      #letterOverlay.show {
+        display: flex;
+      }
+
+      .letter-card {
+        background: var(--cream);
+        color: #2c2438;
+        width: 100%;
+        max-width: 430px;
+        max-height: 78vh;
+        border-radius: 6px;
+        padding: 26px 24px 20px;
+        position: relative;
+        transform: rotate(-1deg);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+        display: flex;
+        flex-direction: column;
+        animation: cardIn 0.42s cubic-bezier(0.25, 0.9, 0.3, 1.1);
+      }
+      .letter-card.exit {
+        animation: cardOut 0.32s ease forwards;
+      }
+      @keyframes cardIn {
+        from {
+          opacity: 0;
+          transform: scale(0.55) rotate(-1deg) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) rotate(-1deg) translateY(0);
+        }
+      }
+      @keyframes cardOut {
+        from {
+          opacity: 1;
+          transform: scale(1) rotate(-1deg) translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: scale(0.55) rotate(-1deg) translateY(20px);
+        }
+      }
+
+      .letter-seal {
+        position: absolute;
+        top: -14px;
+        left: 24px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--red);
+        border: 2px solid var(--outline);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        font-size: 15px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+      }
+      .letter-title {
+        font-family: 'Press Start 2P', monospace;
+        font-size: 11px;
+        color: var(--red-dim);
+        margin: 12px 0 16px;
+        letter-spacing: 0.5px;
+      }
+      .letter-body {
+        overflow-y: auto;
+        line-height: 1.7;
+        font-size: 16.5px;
+        white-space: pre-line;
+        padding-right: 8px;
+        flex: 1;
+      }
+      .letter-body::-webkit-scrollbar {
+        width: 6px;
+      }
+      .letter-body::-webkit-scrollbar-thumb {
+        background: #d9cdae;
+        border-radius: 3px;
+      }
+
+      .letter-close {
+        position: absolute;
+        top: -14px;
+        right: -10px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 2px solid var(--outline);
+        background: var(--red);
+        color: var(--cream);
+        font-family: 'Press Start 2P', monospace;
+        font-size: 12px;
+        cursor: pointer;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+      }
+      .letter-close:hover,
+      .letter-close:focus-visible {
+        background: #ff6a4f;
+        outline: 2px solid var(--cream);
+        outline-offset: 1px;
+      }
+
+      /* ================= HEADER ================= */
+      #hint {
+        position: fixed;
+        top: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Press Start 2P', monospace;
+        font-size: 9px;
+        color: var(--dim);
+        text-align: center;
+        z-index: 4;
+        letter-spacing: 0.5px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        pointer-events: none;
+      }
+
+      @media (max-width: 480px) {
+        .env-slot {
+          width: 46px;
+          height: 34px;
+        }
+        .letter-body {
+          font-size: 15px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .star,
+        .firefly,
+        .env-float,
+        .cat-wrap.bob {
+          animation: none !important;
+        }
+        .env-slot,
+        .letter-card {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <div class="moon"></div>
+      <div id="starLayer"></div>
+
+      <svg
+        class="mtn"
+        viewBox="0 0 400 100"
+        preserveAspectRatio="none"
+        style="height: 120px"
+      >
+        <polygon
+          class="mtn-back"
+          points="0,100 0,55 60,20 130,60 200,15 260,55 320,25 400,60 400,100"
+        />
+      </svg>
+      <svg
+        class="mtn"
+        viewBox="0 0 400 100"
+        preserveAspectRatio="none"
+        style="height: 80px; bottom: 10%"
+      >
+        <polygon
+          class="mtn-front"
+          points="0,100 0,65 90,30 170,68 250,35 340,65 400,45 400,100"
+        />
+      </svg>
+
+      <div id="fireflyLayer"></div>
+      <div class="ground"></div>
+
+      <img
+        class="couple-img"
+        src="images/transparent-couple.png"
+        alt="the two of us"
+      />
+
+      <div id="envLayer"></div>
+    </div>
+
+    <div id="hint">▸ TAP AN ENVELOPE</div>
+
+    <div id="letterOverlay">
+      <div class="letter-card" id="letterCard">
+        <div class="letter-seal">♥</div>
+        <button
+          class="letter-close"
+          id="closeBtn"
+          aria-label="Close letter"
+        >
+          ✕
+        </button>
+        <div class="letter-title" id="letterTitle"></div>
+        <div class="letter-body" id="letterBody"></div>
+      </div>
+    </div>
+
+    <script>
+      /* =========================================================
+   STARS + FIREFLIES
+========================================================= */
+      const starLayer = document.getElementById('starLayer');
+      for (let i = 0; i < 50; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        const size = Math.random() * 2 + 1;
+        s.style.width = size + 'px';
+        s.style.height = size + 'px';
+        s.style.left = Math.random() * 100 + '%';
+        s.style.top = Math.random() * 55 + '%';
+        s.style.animationDelay = Math.random() * 3.5 + 's';
+        starLayer.appendChild(s);
+      }
+      const fireflyLayer = document.getElementById('fireflyLayer');
+      for (let i = 0; i < 10; i++) {
+        const f = document.createElement('div');
+        f.className = 'firefly';
+        f.style.left = 10 + Math.random() * 80 + '%';
+        f.style.top = 55 + Math.random() * 35 + '%';
+        f.style.animationDelay = Math.random() * 6 + 's';
+        f.style.animationDuration = 5 + Math.random() * 4 + 's';
+        fireflyLayer.appendChild(f);
+      }
+
+      /* =========================================================
+   LETTERS — edit freely. Each id must be unique 1-10.
+   Titles show in the pixel-font header; body supports
+   blank lines for paragraph breaks.
+========================================================= */
+      const LETTERS = [
+        {
+          id: 1,
+          title: 'The Window Seat',
+          body: `My love,
+
+Eleventh grade. I was sitting by the window, not really listening to whatever we were supposed to be learning that day.
+
+Then I looked over at the back benches and saw you laughing with your friends. I don't know what was funny. I only remember the smile.
+
+We didn't know each other yet. I don't think you even noticed me looking. But something in me had already decided something.
+
+After that day, I started watching for you more. Quietly. You had no idea.
+
+— A.`,
+        },
+
+        {
+          id: 2,
+          title: 'The Long Wait',
+          body: `My love,
+
+I finally got brave enough to ask you — through our friends, because that's just how it worked back then.
+
+You didn't answer right away. You weren't sure yet, and looking back, that was fair.
+
+Weeks passed. I found out other guys were interested too, and it made me furious, because I already knew I wanted you.
+
+What I didn't know then — you'd started noticing me too, in your own quiet way.
+
+On August 16th, 2016, you said yes. Ten years later, it's still the best sentence anyone has ever said to me.
+
+— A.`,
+        },
+
+        {
+          id: 3,
+          title: 'The Bike Ride',
+          body: `My love,
+
+After you said yes, everything got easier between us. We talked more, laughed more, actually got to know each other properly.
+
+One day you climbed onto the back of my bike, and we rode until the road gave way to sand.
+
+We fought sometimes too — we were teenagers, still figuring it all out.
+
+But we always came back to each other. Every single time.
+
+— A.`,
+        },
+
+        {
+          id: 4,
+          title: 'The Goodbye',
+          body: `My love,
+
+Then came the hardest part — I had to leave for studies, an ocean suddenly between your door and mine.
+
+We cried before I left. Neither of us said how hard it would be. We didn't have to.
+
+I remember thinking, on that flight, that I had no idea how we'd make this work. I just knew I wasn't ready to lose you.
+
+— A.`,
+        },
+
+        {
+          id: 5,
+          title: 'The Distance',
+          body: `My love,
+
+Long distance was harder than either of us expected. Small things turned into big fights. Time zones fought against us daily.
+
+But every single fight just meant we were choosing each other again anyway.
+
+Five years, most of it apart. You trusted me from thousands of miles away. I trusted you the same.
+
+We both just kept going — studies, jobs, waiting for this.
+
+— A.`,
+        },
+
+        {
+          id: 6,
+          title: 'Coming Home',
+          body: `My love,
+
+Now I come home every year, and every single time still feels like that first day at the window.
+
+I don't think that feeling is ever going to go away. I hope it doesn't.
+
+— A.`,
+        },
+
+        {
+          id: 7,
+          title: 'Asking Your Parents',
+          body: `My love,
+
+Two years ago, you started asking — gently, then not so gently — when I'd finally come to your house and talk to your parents.
+
+Last year, I did. My family and I arrived at your door with one plan, spoken plainly.
+
+Your parents said yes.
+
+It's one of the happiest days either of us has lived.
+
+— A.`,
+        },
+
+        {
+          id: 8,
+          title: 'To Us, Getting Married',
+          body: `My love,
+
+Soon, we get married. After the window, the bike, the ocean between us, the years of patience — we finally just get to stay.
+
+I keep trying to imagine what it'll feel like to not say goodbye at an airport again. I can't quite picture it yet. I can't wait to find out.
+
+— A.`,
+        },
+
+        {
+          id: 9,
+          title: 'To Our Someday Kids',
+          body: `My love,
+
+I still tell you I want three — two daughters and a son. You laugh every time, but I mean it.
+
+I think about the version of us that gets to be parents together, and it makes everything we've gone through feel worth it twice over.
+
+— A.`,
+        },
+
+        {
+          id: 10,
+          title: 'Ten Years, and Always',
+          body: `My love,
+
+You are the most precious thing in my life, and I don't say that lightly.
+
+You've trusted me and been patient with me, and chosen me again and again, in moments when it would have been easier not to.
+
+I don't picture my life without you in it. I don't plan to find out what that looks like.
+
+Happy ten years. Here's to every year after this one.
+
+— A.`,
+        },
+      ];
+
+      /* Positions as [left%, top%] — kept clear of the tree/cats at bottom-center */
+      const POSITIONS = [
+        [8, 16],
+        [24, 9],
+        [41, 20],
+        [58, 10],
+        [76, 17],
+        [12, 42],
+        [30, 52],
+        [66, 48],
+        [84, 40],
+        [50, 30],
+      ];
+
+      /* =========================================================
+   BUILD ENVELOPES
+========================================================= */
+      const envLayer = document.getElementById('envLayer');
+      LETTERS.forEach((letter, i) => {
+        const [l, t] = POSITIONS[i];
+        const slot = document.createElement('button');
+        slot.className = 'env-slot';
+        slot.style.left = l + '%';
+        slot.style.top = t + '%';
+        slot.setAttribute(
+          'aria-label',
+          'Open letter: ' + letter.title,
+        );
+        slot.innerHTML = `
+    <div class="env-float">
+      <div class="env-body"></div>
+      <div class="env-flap"></div>
+      <div class="env-seal">♥</div>
+    </div>
+  `;
+        slot.addEventListener('click', () =>
+          openLetter(letter, slot),
+        );
+        envLayer.appendChild(slot);
+      });
+
+      /* =========================================================
+   OPEN / CLOSE LOGIC
+========================================================= */
+      const overlay = document.getElementById('letterOverlay');
+      const card = document.getElementById('letterCard');
+      const titleEl = document.getElementById('letterTitle');
+      const bodyEl = document.getElementById('letterBody');
+      const closeBtn = document.getElementById('closeBtn');
+      let activeSlot = null;
+
+      function openLetter(letter, slotEl) {
+        activeSlot = slotEl;
+        const rect = slotEl.getBoundingClientRect();
+        const cx = window.innerWidth / 2,
+          cy = window.innerHeight / 2;
+        const dx = cx - (rect.left + rect.width / 2);
+        const dy = cy - (rect.top + rect.height / 2);
+        slotEl.style.setProperty('--fx', dx + 'px');
+        slotEl.style.setProperty('--fy', dy + 'px');
+        slotEl.classList.add('flying');
+        slotEl.classList.add('opened');
+
+        titleEl.textContent = letter.title;
+        bodyEl.textContent = letter.body;
+        bodyEl.scrollTop = 0;
+
+        setTimeout(() => {
+          overlay.classList.add('show');
+          card.classList.remove('exit');
+        }, 300);
+      }
+
+      function closeLetter() {
+        card.classList.add('exit');
+        setTimeout(() => {
+          overlay.classList.remove('show');
+          if (activeSlot) {
+            activeSlot.classList.remove('flying');
+          }
+        }, 300);
+      }
+
+      closeBtn.addEventListener('click', closeLetter);
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeLetter();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('show'))
+          closeLetter();
+      });
+    </script>
+  </body>
+</html>
