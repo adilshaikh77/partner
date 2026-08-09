@@ -197,16 +197,6 @@
         image-rendering: crisp-edges;
         filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.45));
         z-index: 3;
-        animation: coupleBob 3s ease-in-out infinite;
-      }
-      @keyframes coupleBob {
-        0%,
-        100% {
-          transform: translateX(-50%) translateY(0);
-        }
-        50% {
-          transform: translateX(-50%) translateY(-4px);
-        }
       }
 
       /* ================= ENVELOPES ================= */
@@ -239,17 +229,7 @@
       .env-float {
         width: 100%;
         height: 100%;
-        animation: envFloat 3.4s ease-in-out infinite;
         position: relative;
-      }
-      @keyframes envFloat {
-        0%,
-        100% {
-          transform: translateY(0) rotate(-2deg);
-        }
-        50% {
-          transform: translateY(-6px) rotate(2deg);
-        }
       }
 
       .env-body {
@@ -274,17 +254,13 @@
         left: 50%;
         top: 56%;
         transform: translate(-50%, -50%);
-        width: 19px;
-        height: 19px;
-        border-radius: 50%;
-        background: var(--red);
-        border: 2px solid var(--outline);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 11px;
-        color: var(--gold);
+        font-size: 20px;
         line-height: 1;
+        color: var(--red);
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
       }
       .env-slot:hover .env-body {
         background: #ffd97a;
@@ -438,9 +414,7 @@
 
       @media (prefers-reduced-motion: reduce) {
         .star,
-        .firefly,
-        .env-float,
-        .cat-wrap.bob {
+        .firefly {
           animation: none !important;
         }
         .env-slot,
@@ -552,110 +526,57 @@
       const LETTERS = [
         {
           id: 1,
-          title: 'The Window Seat',
-          body: `My love,
-
-Eleventh grade. I was sitting by the window, not really listening to whatever we were supposed to be learning that day.
-
-Then I looked over at the back benches and saw you laughing with your friends. I don't know what was funny. I only remember the smile.
-
-We didn't know each other yet. I don't think you even noticed me looking. But something in me had already decided something.
-
-After that day, I started watching for you more. Quietly. You had no idea.
-
-— A.`,
+          title: '💕',
+          body: `Naznin das saal ho gye tere saath, aise socho to kitna sab time lagta hai, par ye 10 saal mere liye ek pal ki tarah guzar gaye. Tere saath bitaye har pal ke liye shukriya.
+          Pata mujhe ye ghamand k mujhe jo chahiye me leke rehta, bas teri wajah se, kyuki jab se tujhe dekha tha haste hue, mene socha tha k mujhe ye chahiye. Aise to koi aur chiz k liye zid ni kiye uppar wale se, bas tujhe chhod k.
+— Tera Shohar`,
         },
 
         {
           id: 2,
-          title: 'The Long Wait',
-          body: `My love,
+          title: '💖',
+          body: `Mujhe hota me sab chize laake tere saamne rakhdu. Achhe achhe pyaare dress, mst mst lipstick, jo bhi chhoti chiz dikhe, sab sab tere saamne rakh du. Tujhe khush kru, tere chehre ki hasi dekhu.
 
-I finally got brave enough to ask you — through our friends, because that's just how it worked back then.
-
-You didn't answer right away. You weren't sure yet, and looking back, that was fair.
-
-Weeks passed. I found out other guys were interested too, and it made me furious, because I already knew I wanted you.
-
-What I didn't know then — you'd started noticing me too, in your own quiet way.
-
-On August 16th, 2016, you said yes. Ten years later, it's still the best sentence anyone has ever said to me.
-
-— A.`,
+— Tera Adil`,
         },
 
         {
           id: 3,
-          title: 'The Bike Ride',
-          body: `My love,
+          title: '💗',
+          body: `Tujhse dur rehna achha nai lagta, akela akela lagta hamesha jb bhi tera msg call nai aata to, par fir jab tu msg call krti to aisa hota bas phn me se ghus k tujhe gale lagane aajau. Kitni der apan dur rahe. Paas to tu hamesha rahi mere. Nai ab zyada time apan dur reh rahe mere se nai hota. Tujhe fir mere saamne bitha k rakhu aur dekhta rahu
 
-After you said yes, everything got easier between us. We talked more, laughed more, actually got to know each other properly.
-
-One day you climbed onto the back of my bike, and we rode until the road gave way to sand.
-
-We fought sometimes too — we were teenagers, still figuring it all out.
-
-But we always came back to each other. Every single time.
-
-— A.`,
+— Tera baby`,
         },
 
         {
           id: 4,
-          title: 'The Goodbye',
-          body: `My love,
+          title: '💓',
+          body: `Tu mujhse kitna sab pyar krti, meri sunnti rehti daat deta to, mera gussa seh leti, mujhe samjhaati, mujhe khush krti, mujhe himmat deti, meri itni izzat krti, meri kitni sab fikr krti, ye sab itna dur reh k, fir jb tu paas rahegi to kitna sab pyar kregi me to khushi se mar jaauga.
 
-Then came the hardest part — I had to leave for studies, an ocean suddenly between your door and mine.
-
-We cried before I left. Neither of us said how hard it would be. We didn't have to.
-
-I remember thinking, on that flight, that I had no idea how we'd make this work. I just knew I wasn't ready to lose you.
-
-— A.`,
+— Tera darling`,
         },
 
         {
           id: 5,
-          title: 'The Distance',
-          body: `My love,
+          title: '🫂',
+          body: `Tu bohot khubsurat hai, teri aankhe door koi taare ki tarah chamakti. Tere hoth gulab ki tarah laal, teri hasi phool ki tarah khilti, teri baatein dil ko sukoon deti, tere baal khule krke haath ghumaane mann krta, tera chehra chaand ki tarah chamakta, chaand bhi tere aage fika pad jaaye. Tujhpe har kapde aake pyare bann jaate. 
 
-Long distance was harder than either of us expected. Small things turned into big fights. Time zones fought against us daily.
-
-But every single fight just meant we were choosing each other again anyway.
-
-Five years, most of it apart. You trusted me from thousands of miles away. I trusted you the same.
-
-We both just kept going — studies, jobs, waiting for this.
-
-— A.`,
+— Teri jaan`,
         },
 
         {
           id: 6,
-          title: 'Coming Home',
-          body: `My love,
-
-Now I come home every year, and every single time still feels like that first day at the window.
-
-I don't think that feeling is ever going to go away. I hope it doesn't.
-
-— A.`,
+          title: '💘',
+          body: `Bohot pyar krta tujhse naznin. Kitna? Tu hissa hai mera, Aisi koi waqt nai jo tujhe soche bina jaaye, na mujhe aisa waqt chahiye. Mere dil me tu, mere dimaag me tu, mere sapno me tu, meri dhadkan me tu, aankhe bandh kru to tu dikhti, aankhe kholu to tu dikhti. Pagal hu tere liye tere pyar me. Har din pyar badhta tere liye, din khatam hota to lagta kam pyar kiya aur krna. Itne sab saal hogye mera mann nai bhara, aur bohot pyar bhara pada tere liye, zindagi bhar rahega.
+— Tera shonaa`,
         },
 
         {
           id: 7,
-          title: 'Asking Your Parents',
-          body: `My love,
+          title: '🖤',
+          body: `Tu meri hai naznin, aur me tera. Tujhe jitna lagta me tujhse pyar krta me uss se bohot zyada pyar krta. Tu jitna sochti me teri izzat krta me uss se bohot zyada teri izzat krta. Tu biwi hai meri naznin, bohot fikr krta teri. Allah tujhe saari khushiya de, tu jo jo sochi tere khud k liye, apan k liye, ghar walo k liye, sab allah pura kre, aur ho sake to mere zariye. Tere chehre pe aayi hasi meri wajah se aaye hamesha. Aansu aaye to vo bhi sirf khushi k ho. Hamesha tere paas rahuga, tujhe duniya ki saari khushiya du.
 
-Two years ago, you started asking — gently, then not so gently — when I'd finally come to your house and talk to your parents.
-
-Last year, I did. My family and I arrived at your door with one plan, spoken plainly.
-
-Your parents said yes.
-
-It's one of the happiest days either of us has lived.
-
-— A.`,
+— Naznin ka Adil`,
         },
 
         {
