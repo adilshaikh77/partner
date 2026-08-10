@@ -9,7 +9,7 @@
     <title>Ten Years — Letters</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Literata:ital,wght@0,400;0,600;1,400;1,500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Literata:ital,wght@0,400;0,600;1,400;1,500&family=Noto+Serif+Devanagari:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -343,18 +343,20 @@
       }
       .letter-title {
         font-family: 'Press Start 2P', monospace;
-        font-size: 11px;
+        font-size: 15px;
         color: var(--red-dim);
         margin: 12px 0 16px;
         letter-spacing: 0.5px;
       }
       .letter-body {
         overflow-y: auto;
-        line-height: 1.7;
+        line-height: 1.8;
         font-size: 16.5px;
         white-space: pre-line;
         padding-right: 8px;
         flex: 1;
+        font-family:
+          'Literata', 'Noto Serif Devanagari', Georgia, serif;
       }
       .letter-body::-webkit-scrollbar {
         width: 6px;
@@ -620,18 +622,19 @@ Happy ten years. Here's to every year after this one.
         },
       ];
 
-      /* Positions as [left%, top%] — kept clear of the tree/cats at bottom-center */
+      /* Positions as [left%, top%] — a clean 2-column x 5-row grid, filled
+   left-to-right then top-to-bottom, so letter 1&2 are row one, 3&4 row two, etc. */
       const POSITIONS = [
-        [8, 16],
-        [24, 9],
-        [41, 20],
-        [58, 10],
-        [76, 17],
-        [12, 42],
-        [30, 52],
-        [66, 48],
-        [84, 40],
-        [50, 30],
+        [28, 15],
+        [64, 15],
+        [28, 27],
+        [64, 27],
+        [28, 39],
+        [64, 39],
+        [28, 51],
+        [64, 51],
+        [28, 63],
+        [64, 63],
       ];
 
       /* =========================================================
